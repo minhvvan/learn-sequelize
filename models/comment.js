@@ -5,11 +5,11 @@ module.exports = class Comment extends Sequelize.Model{
         return super.init({
             comment: {
                 type: Sequelize.STRING(100),
-                allowNull: true,
+                allowNull: false,
             },
-            create_at: {
+            created_at: {
                 type: Sequelize.DATE,
-                allowNUll: false,
+                allowNUll: true,
                 defaultValue: Sequelize.NOW,
             },
         }, {
@@ -23,7 +23,7 @@ module.exports = class Comment extends Sequelize.Model{
         });
     }
     static associate(db) {
-        db.User.belongsTo(db.User, { foreignKey: 'commenter', targetKey: 'id' });
+        db.Comment.belongsTo(db.User, { foreignKey: 'commenter', targetKey: 'id' });
 
     }
 };
